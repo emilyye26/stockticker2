@@ -28,7 +28,6 @@ http.createServer(function (req, res) {
         res.write("Processing..<br/>");
         var qName = url.parse(req.url, true).query.name;
         var qType = url.parse(req.url, true).query.type;
-        // res.write(qType);
         MongoClient.connect(mongoUrl, function(err, db) {
             if(err) { 
                 console.log("Connection err: " + err); return; 
@@ -51,7 +50,6 @@ http.createServer(function (req, res) {
                 } 
                 else 
                 {
-                  console.log("Items: ");
                   for (i=0; i<items.length; i++){
                       console.log( "Company Name: " + items[i].companyName);console.log("Ticker: " + items[i].ticker);
                       console.log("Price: " + items[i].price);
@@ -65,4 +63,5 @@ http.createServer(function (req, res) {
 
     }
 }).listen(port);
+
 
