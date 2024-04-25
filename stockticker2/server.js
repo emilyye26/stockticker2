@@ -41,6 +41,7 @@ http.createServer(function (req, res) {
             var coll = dbo.collection('PublicCompanies');
 
             // Creates query based on if the user chose to search by name or ticker
+            var theQuery = {};
             if (qType == 'tickerName') {
                 theQuery = {ticker: qName}
                 // result = coll.find(theQuery)
@@ -73,5 +74,6 @@ http.createServer(function (req, res) {
     }
     
 }).listen(port);
+
 
 
