@@ -14,28 +14,33 @@ http.createServer(function (req, res) {
 
     if (path == "/")
     {
-    s = "<form action = '/process' method = 'GET'><br/>" + 
-        "<label>Search:" + "</label>" + 
-        "<input type='text' name='name'> <br/>" +
-        "<input type='radio' id='company' name='type' value='companyName'/>" + "<label for='company'>Company Name" + "</label>" +
-        "<input type='radio' id='ticker' name='type' value='tickerName'/>" + 
-        "<label for='ticker'>Ticker" + "</label><br/>" + 
-        "<input type= 'submit'>" + 
-        "</form>";
+        // Creates HTML form and writes to page
+        s = "<form action = '/process' method = 'GET'><br/>" + 
+            "<label>Search:" + "</label>" + 
+            "<input type='text' name='name'> <br/>" +
+            "<input type='radio' id='company' name='type' value='companyName'/>" + "<label for='company'>Company Name" + "</label>" +
+            "<input type='radio' id='ticker' name='type' value='tickerName'/>" + 
+            "<label for='ticker'>Ticker" + "</label><br/>" + 
+            "<input type= 'submit'>" + 
+            "</form>";
         res.write(s);
     }
     else if (path == "/process") {
-        res.write("Processing..<br/>");
+        // Gets name and query type from the URL 
         var qName = url.parse(req.url, true).query.name;
         var qType = url.parse(req.url, true).query.type;
+        
+        // Connects to Mongo client
         MongoClient.connect(mongoUrl, function(err, db) {
             if(err) { 
                 console.log("Connection err: " + err); return; 
             }
             
+            // Accesses database and collection
             var dbo = db.db("Stock");
             var coll = dbo.collection('PublicCompanies');
-            res.write(qType);
+
+            // Creates query based on if the user chose to search by name or ticker
             if (qType == 'tickerName') {
                 theQuery = {ticker: qName}
                 result = coll.find(theQuery)
@@ -50,9 +55,13 @@ http.createServer(function (req, res) {
                 } 
                 else 
                 {
+                // Iterates through results, logging and printing company info
                   for (i=0; i<items.length; i++){
                       console.log( "Company Name: " + items[i].companyName);console.log("Ticker: " + items[i].ticker);
                       console.log("Price: " + items[i].price);
+                      res.write("<p>Company Name: " + items[i].companyName + "</p>");
+                      res.write("<p>Ticker: " + items[i].ticker + "</p>");
+                      res.write("<p>Price: " + items[i].price + "</p>");
                   }
                 }   
                 db.close();
