@@ -62,7 +62,6 @@ http.createServer(function (req, res) {
                       res.write("<p>Company Name: " + items[i].companyName + "</p>");
                       res.write("<p>Ticker: " + items[i].ticker + "</p>");
                       res.write("<p>Price: " + items[i].price + "</p>");
-                      res.end();
                   }
                 }   
                 db.close();
