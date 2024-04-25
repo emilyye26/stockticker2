@@ -13,6 +13,9 @@
   "keywords": [
     "stockticker2"
   ],
+  "dependencies": {
+    "mongodb": "^4.1.1"
+  },
   "author": "emi",
   "license": "UNLICENSED"
 }
