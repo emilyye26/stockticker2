@@ -1,0 +1,19 @@
+{
+  "name": "stockticker2",
+  "version": "1.0.0",
+  "description": "stockticker 2!!",
+  "main": "server.js",
+  "scripts": {
+    "test": "2 + 2",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "stockticker2"
+  },
+  "keywords": [
+    "stockticker2"
+  ],
+  "author": "emi",
+  "license": "UNLICENSED"
+}
