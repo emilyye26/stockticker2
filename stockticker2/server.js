@@ -43,13 +43,13 @@ http.createServer(function (req, res) {
             // Creates query based on if the user chose to search by name or ticker
             if (qType == 'tickerName') {
                 theQuery = {ticker: qName}
-                result = coll.find(theQuery)
+                // result = coll.find(theQuery)
             } else if (qType == "companyName") {
                 theQuery = {companyName: qName}
-                result = coll.find(theQuery)
+                // result = coll.find(theQuery)
             }
             
-            result.toArray(function(err, items) {
+            coll.find(theQuery).toArray(function(err, items) {
                 if (err) {
                   console.log("Error: " + err);
                 } 
@@ -73,6 +73,5 @@ http.createServer(function (req, res) {
     }
     
 }).listen(port);
-
 
 
