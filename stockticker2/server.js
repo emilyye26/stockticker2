@@ -2,6 +2,8 @@ var http = require('http');
 var url = require('url');
 var qs = require('querystring');
 
+var port = process.env.PORT || 3000;
+
 const MongoClient = require('mongodb').MongoClient;
 const mongoUrl = 'mongodb+srv://emilyye526:May262004@product.5iv2qax.mongodb.net/?retryWrites=true&w=majority&appName=product';
 
@@ -62,4 +64,5 @@ http.createServer(function (req, res) {
         }); 
 
     }
-}).listen(8080);
+}).listen(port);
+
